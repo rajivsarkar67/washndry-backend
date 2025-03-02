@@ -1,5 +1,5 @@
 const Order = require("../model/orderModel");
-
+//post api
 exports.createOrder = async (req, res) => {
   try {
     // Check if user is authenticated
