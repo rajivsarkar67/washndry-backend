@@ -8,6 +8,7 @@ const router = express.Router();
 router.post("/orders", authMiddleware, createOrder);
 router.get("/orders", authMiddleware, getUserOrders);
 
+router.get("/all-orders", getAllOrders);
 router.delete("/orders/delete/:orderId", authMiddleware, deleteOrder); // Delete Order
 
 module.exports = router;

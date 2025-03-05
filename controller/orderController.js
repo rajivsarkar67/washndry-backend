@@ -75,6 +75,28 @@ exports.getUserOrders = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+exports.getAllOrders = async (req, res) => {
+  try {
+    const orders = await Order.find().sort({ createdAt: -1 });
+
+    if (!orders || orders.length === 0) {
+      return res.status(404).json({ message: "No orders found." });
+    }
+
+    // Convert Mongoose documents to plain objects before modifying
+    const modifiedOrders = orders.map(order => ({
+      ...order.toObject(),
+      status: order.status || "Ordered", // Ensure default value
+      deliveryDate: order.deliveryDate || new Date(order.createdAt.getTime() + 5 * 24 * 60 * 60 * 1000), // Ensure 5-day addition
+    }));
+
+    res.status(200).json({ orders: modifiedOrders });
+
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 
 
 exports.deleteOrder = async (req, res) => {
