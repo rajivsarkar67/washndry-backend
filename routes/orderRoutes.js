@@ -8,7 +8,9 @@ const router = express.Router();
 router.post("/orders", authMiddleware, createOrder);
 router.get("/orders", authMiddleware, getUserOrders);
 
-router.get("/all-orders", getAllOrders);
+
+router.get("/all-orders", authMiddleware, getAllOrders);
+router.patch("/update-order", authMiddleware, updateOrder);
 router.delete("/orders/delete/:orderId", authMiddleware, deleteOrder); // Delete Order
 
 module.exports = router;
