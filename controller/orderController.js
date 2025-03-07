@@ -126,30 +126,4 @@ exports.deleteOrder = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-exports.updateOrder = async (req, res) => {
-  try {
-    const { orderId, status, pickupDate, deliveryDate } = req.body;
 
-    if (!orderId) {
-      return res.status(400).json({ message: "Order ID is required." });
-    }
-    if (pickupDate && deliveryDate) {
-      return res.status(400).json({ message: "Only one of pickupDate or deliveryDate should be provided." });
-    }
-    const updateFields = {};
-    if (status) updateFields.status = status;
-    if (pickupDate) updateFields.pickupDate = pickupDate;
-    if (deliveryDate) updateFields.deliveryDate = deliveryDate;
-    const updatedOrder = await Order.findByIdAndUpdate(
-      orderId,
-      { $set: updateFields },
-      { new: true }
-    );
-    if (!updatedOrder) {
-      return res.status(404).json({ message: "Order not found." });
-    }
-    res.status(200).json({ message: "Order updated successfully.", order: updatedOrder });
-  } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
