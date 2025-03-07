@@ -43,13 +43,12 @@ const orderSchema = new mongoose.Schema(
     status: {
       type: String,
       default: "Ordered",
-      enum: ["Ordered", "Shipped", "Delivered", "Cancelled"],
-      immutable: true,
+      
+      
     },
     deliveryDate: {
       type: Date,
-      default: () => new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
-      immutable: true,
+      
     },
   },
   { timestamps: true }
