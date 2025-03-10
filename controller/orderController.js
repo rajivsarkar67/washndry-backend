@@ -65,7 +65,7 @@ exports.getUserOrders = async (req, res) => {
     const modifiedOrders = orders.map(order => ({
       ...order.toObject(),
       status: order.status || "Ordered", // Ensure default value
-      deliveryDate: order.deliveryDate || new Date(order.createdAt.getTime() + 5 * 24 * 60 * 60 * 1000), // Ensure 5-day addition
+      deliveryDate: order.deliveryDate || new Date(order.selectedDate.getTime() + 5 * 24 * 60 * 60 * 1000), // Ensure 5-day addition
     }));
 
     res.status(200).json({ orders: modifiedOrders });
@@ -87,7 +87,7 @@ exports.getAllOrders = async (req, res) => {
     const modifiedOrders = orders.map(order => ({
       ...order.toObject(),
       status: order.status || "Ordered", // Ensure default value
-      deliveryDate: order.deliveryDate || new Date(order.createdAt.getTime() + 5 * 24 * 60 * 60 * 1000), // Ensure 5-day addition
+      deliveryDate: order.deliveryDate || new Date(order.selectedDate.getTime() + 5 * 24 * 60 * 60 * 1000), // Ensure 5-day addition
     }));
 
     res.status(200).json({ orders: modifiedOrders });
