@@ -139,7 +139,7 @@ exports.updateOrder = async (req, res) => {
     }
     const updateFields = {};
     if (status) updateFields.status = status;
-    if (pickupDate) updateFields.pickupDate = pickupDate;
+    if (pickupDate) updateFields.selectedDate = pickupDate;
     if (deliveryDate) updateFields.deliveryDate = deliveryDate;
     const updatedOrder = await Order.findByIdAndUpdate(
       orderId,
