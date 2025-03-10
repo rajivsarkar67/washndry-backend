@@ -26,7 +26,7 @@ const orderSchema = new mongoose.Schema(
       default: 0,
     },
     selectedDate: {
-      type: String,
+      type: Date,
       required: true,
     },
     selectedTimeSlot: {
